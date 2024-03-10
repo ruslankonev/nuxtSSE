@@ -1,6 +1,6 @@
 {
   "name": "@brycesteve/nuxt-sse",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Nuxt module to simplify using Server Sent Events",
   "repository": {
     "type": "git",
