@@ -19,13 +19,22 @@ NOTE: I created this for my own personal use, so it may have issues.
 
 ## Quick Setup
 
+1. Add ``@brycesteve/nuxt-sse`` dependency to your project
 
-1. Add `nuxtSSE` to the `modules` section of `nuxt.config.ts`
+```bash
+yarn add @brycesteve/nuxt-sse 
+# or 
+npm install @brycesteve/nuxt-sse
+#or
+pnpm add @brycesteve/nuxt-sse
+```
+
+1. Add `@brycesteve/nuxt-sse` to the `modules` section of `nuxt.config.ts`
 
 ```js
 export default defineNuxtConfig({
   modules: [
-    'nuxtSSE'
+    '@brycesteve/nuxt-sse'
   ]
 })
 ```
@@ -56,11 +65,11 @@ npm run release
 ```
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/nuxtSSE
+[npm-version-src]: https://img.shields.io/npm/v/@brycesteve/nuxt-sse?style=flat&colorA=020420&colorB=00DC82
+[npm-version-href]: https://npmjs.com/package/@brycesteve/nuxt-sse
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npmjs.com/package/nuxtSSE
+[npm-downloads-src]: https://img.shields.io/npm/dm/@brycesteve/nuxt-sse?style=flat&colorA=020420&colorB=00DC82
+[npm-downloads-href]: https://npmjs.com/package/@brycesteve/nuxt-sse
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
