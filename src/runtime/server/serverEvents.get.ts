@@ -1,4 +1,5 @@
 import { useServerEvents } from './composables/useServerEvents';
+import { defineEventHandler, setHeader, setResponseStatus, getQuery } from 'h3';
 
 export default defineEventHandler(async (event) => {
   setHeader(event, "content-type", "text/event-stream");
