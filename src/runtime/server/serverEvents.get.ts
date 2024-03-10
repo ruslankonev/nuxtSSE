@@ -1,0 +1,23 @@
+import { useServerEvents } from './composables/useServerEvents';
+
+export default defineEventHandler(async (event) => {
+  setHeader(event, "content-type", "text/event-stream");
+  setHeader(event, "cache-control", "no-cache");
+  setHeader(event, "connection", "keep-alive");
+  setResponseStatus(event, 200);
+
+  const { addClient, close } = useServerEvents();
+
+  const { clientId } = getQuery(event)
+
+  addClient({
+    id: clientId,
+    response: event.node.res,
+  });
+
+  // Let the connection opened
+  event._handled = true;
+  event.node.req.on("close", () => {
+    close(event.node.res)
+  });
+});
