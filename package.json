@@ -1,10 +1,10 @@
 {
-  "name": "@brycesteve/nuxt-sse",
-  "version": "1.0.1",
+  "name": "@ruslankonev/nuxt-sse",
+  "version": "1.1.0",
   "description": "A Nuxt module to simplify using Server Sent Events",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brycesteve/nuxtSSE.git"
+    "url": "git+https://github.com/ruslankonev/nuxtSSE.git"
   },
   "license": "MIT",
   "type": "module",
@@ -48,9 +48,9 @@
     "vitest": "^1.3.1"
   },
   "bugs": {
-    "url": "https://github.com/brycesteve/nuxtSSE/issues"
+    "url": "https://github.com/ruslankonev/nuxtSSE/issues"
   },
-  "homepage": "https://github.com/brycesteve/nuxtSSE#readme",
+  "homepage": "https://github.com/ruslankonev/nuxtSSE#readme",
   "directories": {
     "test": "test"
   },
