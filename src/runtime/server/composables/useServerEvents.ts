@@ -5,19 +5,19 @@ import type { IncomingMessage, ServerResponse } from "http";
  */
 export interface ServerSentEvent {
   /** Custom event type - default is 'message' */
-  event?: string,
+  event?: string;
   /** data sent to the client */
-  data: any,
+  data: any;
   /** Custom reconnection timeout */
-  retry?: number
+  retry?: number;
 }
 function isServerSentEvent(data: object | string): data is ServerSentEvent {
   return (data as ServerSentEvent).data !== undefined;
 }
 
 interface Client {
-  id?: any,
-  response: ServerResponse<IncomingMessage>
+  id?: any;
+  response: ServerResponse<IncomingMessage>;
 }
 
 let clients: Client[] = [];
@@ -27,7 +27,6 @@ let clients: Client[] = [];
  * Server-side composable to send events to connected clients
  */
 export const useServerEvents = () => {
-
   /**
    * Sends an event to all connected clients
    * @param data The data to send to the client
@@ -37,7 +36,7 @@ export const useServerEvents = () => {
     for (const client of clients) {
       sendData(id, client, data);
     }
-  }
+  };
 
   /**
    * Sends and event to a single client
@@ -45,25 +44,28 @@ export const useServerEvents = () => {
    * @param data The data to send to the client
    */
   const sendSingle = (clientId: any, data: ServerSentEvent | string) => {
-    const client = clients.find(c => c.id === clientId)
+    const client = clients.find((c) => c.id === clientId);
     if (client) {
-      const id = Date.now()
-      sendData(id, client, data)
+      const id = Date.now();
+      sendData(id, client, data);
     }
-  }
+  };
 
-  const sendData = (id: number, client: Client, data: ServerSentEvent | string) => {
+  const sendData = (
+    id: number,
+    client: Client,
+    data: ServerSentEvent | string
+  ) => {
     client.response.write(`id: ${id}\n`);
-    if (typeof data === 'string')
+    if (typeof data === "string")
       client.response.write(`data: ${JSON.stringify(data)}\n\n`);
     else if (isServerSentEvent(data)) {
       client.response.write(`data: ${JSON.stringify(data.data)}\n`);
-      if (data.event)
-        client.response.write(`event: ${data.event}\n`);
+      if (data.event) client.response.write(`event: ${data.event}\n`);
       if (data.retry) {
         client.response.write(`retry: ${data.retry}\n`);
       }
-      client.response.write('\n')
+      client.response.write("\n");
     }
     client.response.flushHeaders();
   };
@@ -74,19 +76,22 @@ export const useServerEvents = () => {
    */
   const addClient = (client: Client) => {
     if (!clients.includes(client)) {
-      clients.push(client)
+      clients.push(client);
     }
-  }
+  };
 
   /**
    * Closes the client connection to the server
    * @param res
    */
   const close = (res: ServerResponse<IncomingMessage>) => {
-    clients = clients.filter(client => client.response !== res)
+    clients = clients.filter((client) => client.response !== res);
     res.end();
   };
 
+  const getClientById = (clientId: any) => {
+    return clients.find((c) => c.id === clientId);
+  };
 
-  return { send, sendSingle, addClient, close };
+  return { send, sendSingle, addClient, close, getClientById };
 };
